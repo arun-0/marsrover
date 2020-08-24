@@ -33,18 +33,26 @@ public class MarsRobot extends Robot {
         if(distance != 1)
             throw new IllegalArgumentException();
 
+        if(marsGrid.isScented((int)getX(), (int)getY(), getMarsOrientation()))
+            return;
+
         if(!isLost) {
             int previousX = (int) getX();
             int previousY = (int) getY();
 
             super.move(distance);
 
+            // if lost
             if(getX() > marsGrid.getMaxX()) {
                 marsGrid.addScentedGrid(previousX, previousY, MarsOrientation.E);
                 isLost = true;
+                // reset coordinate to last seen position
+                super.move(-1 * distance);
             } else if(getY() > marsGrid.getMaxY()) {
                 marsGrid.addScentedGrid(previousX, previousY, MarsOrientation.N);
                 isLost = true;
+                // reset coordinate to last seen position
+                super.move(-1 * distance);
             }
 
         }
@@ -59,11 +67,7 @@ public class MarsRobot extends Robot {
         s.append((int)super.getY());
         s.append(" ");
 
-        double theta = super.getTheta();
-        if (theta < 0)
-            theta = 360 + theta;
-
-        MarsOrientation marsOrientation = MarsOrientation.valueOf(theta);
+        MarsOrientation marsOrientation = getMarsOrientation();
         if (marsOrientation == null) {
             s.append("Invalid Orientation");
         } else {
@@ -74,6 +78,14 @@ public class MarsRobot extends Robot {
             s.append(" LOST");
 
         return s.toString();
+    }
+
+    private MarsOrientation getMarsOrientation() {
+        double theta = super.getTheta();
+        if (theta < 0)
+            theta = 360 + theta;
+
+        return MarsOrientation.valueOf(theta);
     }
 
     public boolean isLost() {
