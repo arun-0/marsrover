@@ -41,7 +41,11 @@ public class MarsRobot extends Robot {
         s.append((int)super.getY());
         s.append(" ");
 
-        MarsOrientation marsOrientation = MarsOrientation.valueOf(super.getTheta());
+        double theta = super.getTheta();
+        if (theta < 0)
+            theta = 360 + theta;
+
+        MarsOrientation marsOrientation = MarsOrientation.valueOf(theta);
         if (marsOrientation == null) {
             s.append("Invalid Orientation");
         } else {

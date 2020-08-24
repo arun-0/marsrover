@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 public class MarsRobotTest {
     @Test
-    public void roverShouldMoveCorrectlyFromOrigin() {
+    public void roverShouldTurnLeftFromOriginCorrectly() {
         Coordinates coor = new Coordinates();
 
         // create an instance of an anonymous class of Rover abstract class, in order to test its move() method
@@ -17,6 +17,20 @@ public class MarsRobotTest {
         robot.move(1);
 
         Assertions.assertEquals("0 1 N", robot.tellCoordinates());
+    }
+
+    @Test
+    public void roverShouldTurnRightFromOriginCorrectly() {
+        Coordinates coor = new Coordinates();
+
+        // create an instance of an anonymous class of Rover abstract class, in order to test its move() method
+        MarsRobot robot = MarsRobot.init("MarsRobot-A", coor);
+
+        //turn Left and move
+        robot.turn(-90);
+        robot.move(1);
+
+        Assertions.assertEquals("0 -1 S", robot.tellCoordinates());
     }
 
 }
