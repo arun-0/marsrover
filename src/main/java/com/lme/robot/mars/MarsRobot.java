@@ -80,10 +80,14 @@ public class MarsRobot extends Robot {
         return s.toString();
     }
 
+    // determine which direction robot is facing. note:- 360 degree turn equals one rotation
     private MarsOrientation getMarsOrientation() {
         double theta = super.getTheta();
+
         if (theta < 0)
             theta = 360 + theta;
+
+        theta = theta % 360;
 
         return MarsOrientation.valueOf(theta);
     }
