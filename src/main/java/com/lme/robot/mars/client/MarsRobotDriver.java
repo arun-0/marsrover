@@ -1,5 +1,8 @@
-package com.lme.robot.mars;
+package com.lme.robot.mars.client;
 
+import com.lme.robot.mars.MarsGrid;
+import com.lme.robot.mars.MarsOrientation;
+import com.lme.robot.mars.MarsRobot;
 import com.lme.rover.Coordinates;
 
 public class MarsRobotDriver {
