@@ -2,6 +2,11 @@ package com.lme.robot;
 
 import com.lme.rover.Coordinates;
 import com.lme.rover.Rover;
+import org.apache.commons.math3.util.Precision;
+
+import java.math.BigDecimal;
+
+import static java.lang.Math.PI;
 
 /**
  * A generic Rover which can move by any amount (not just by a single unit) at any angle
@@ -17,15 +22,22 @@ public abstract class Robot implements Rover {
 
     @Override
     public void turn(double angle) {
-        double radians = Math.toRadians(angle);
-        coordinates.addTheta(radians);
+        coordinates.addTheta(angle);
     }
 
     @Override
     public void move(double distance) {
-        double theta = coordinates.getTheta();
-        coordinates.addX(distance * Math.cos(theta));
-        coordinates.addY(distance * Math.sin(theta));
+        double angle = coordinates.getTheta();
+        double radians = Math.toRadians(angle);
+
+        double x = distance * Math.cos(radians);
+        x = Precision.round(x, 8, BigDecimal.ROUND_DOWN);
+
+        double y = distance * Math.sin(radians);
+        y = Precision.round(y, 8, BigDecimal.ROUND_DOWN);
+
+        coordinates.addX(x);
+        coordinates.addY(y);
     }
 
     @Override

@@ -19,7 +19,8 @@ public class Coordinates {
     public Coordinates(double x, double y, double theta) {
         this.x = x;
         this.y = y;
-        this.theta = Math.toRadians(theta);
+//        this.theta = Math.toRadians(theta);
+        this.theta = theta;
     }
 
     public double getX() {
