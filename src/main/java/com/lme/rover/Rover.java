@@ -1,37 +1,7 @@
 package com.lme.rover;
 
-/**
- * A generic Rover which can move by any amount (not just by a single unit) at any angle
- */
-public abstract class Rover {
-    private String name;
-    private Coordinates coordinates;
-
-    public Rover(String name, Coordinates coordinates){
-        this.name = name;
-        this.coordinates = coordinates;
-    };
-
-    public void turn(double angle) {
-        double radians = Math.toRadians(angle);
-        coordinates.addTheta(radians);
-    }
-
-    public void move(int distance) {
-        double theta = coordinates.getTheta();
-        coordinates.addX(distance * Math.cos(theta));
-        coordinates.addY(distance * Math.sin(theta));
-    }
-
-    public double getX() {
-        return coordinates.getX();
-    }
-    public double getY() {
-        return coordinates.getY();
-    }
-    public double getTheta() {
-        return coordinates.getTheta();
-    }
-
-
+public interface Rover {
+    void turn(double angle);
+    void move(double distance);
+    String tellCoordinates();
 }
