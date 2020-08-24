@@ -9,6 +9,7 @@ import com.lme.rover.Coordinates;
  */
 public class MarsRobot extends Robot {
     private final MarsGrid marsGrid;
+    private boolean isLost = false;
 
     private MarsRobot(String name, Coordinates coordinates, MarsGrid marsGrid){
         super(name, coordinates);
@@ -32,7 +33,19 @@ public class MarsRobot extends Robot {
         if(distance != 1)
             throw new IllegalArgumentException();
 
-        super.move(distance);
+        if(!isLost) {
+            int previousX = (int) getX();
+            int previousY = (int) getY();
+
+            super.move(distance);
+
+            if(getX() > marsGrid.getMaxX() || getY() > marsGrid.getMaxY()) {
+                marsGrid.addScentedGrid(previousX, previousY);
+                isLost = true;
+            }
+
+        }
+
     }
 
     @Override
@@ -54,7 +67,14 @@ public class MarsRobot extends Robot {
             s.append(marsOrientation);
         }
 
+        if(isLost)
+            s.append(" LOST");
+
         return s.toString();
+    }
+
+    public boolean isLost() {
+        return this.isLost;
     }
 
 }

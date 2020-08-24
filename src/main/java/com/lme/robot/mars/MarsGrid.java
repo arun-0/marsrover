@@ -12,6 +12,22 @@ public class MarsGrid {
         this.maxGrid = new Grid(x, y);
     }
 
+    public int getMaxX() {
+        return maxGrid.getX();
+    }
+
+    public int getMaxY() {
+        return maxGrid.getY();
+    }
+
+    public void addScentedGrid(int x, int y) {
+        scentedGrids.add(new Grid(x, y));
+    }
+
+    public boolean isScented(int x, int y) {
+        return scentedGrids.contains(new Grid(x, y));
+    }
+
     class Grid {
         private int x;
         private int y;
