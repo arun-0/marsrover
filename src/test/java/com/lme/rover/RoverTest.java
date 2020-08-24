@@ -11,9 +11,9 @@ public class RoverTest {
         // create an instance of an anonymous class of Rover abstract class, in order to test its move() method
         Rover rover = new Rover("Rover-A", coor) {};
 
-        // move 4 units in 45 degree
-        double radians = Math.toRadians(45);
-        rover.move(4, radians);
+        //turn 45 degree and move 4 units
+        rover.turn(45);
+        rover.move(4);
 
         Assertions.assertEquals(2.8284271247461903, rover.getX());
         Assertions.assertEquals(2.82842712474619, rover.getY());
@@ -27,9 +27,9 @@ public class RoverTest {
         // create an instance of an anonymous class of Rover abstract class, in order to test its move() method
         Rover rover = new Rover("Rover-A", coor) {};
 
-        // move 4 units in 45 degree
-        double radians = Math.toRadians(30);
-        rover.move(5, radians);
+        //turn 30 degree and move 5 units
+        rover.turn(30);
+        rover.move(5);
 
 
         System.out.println("rover = " + rover.getX() + " " + rover.getY() + " " + rover.getTheta());
@@ -41,14 +41,14 @@ public class RoverTest {
 
     @Test
     public void roverShouldMoveCorrectlyFromAnywhereFromAnyInitialAngle() {
-        Coordinates coor = new Coordinates(3, 4, Math.toRadians(30));
+        Coordinates coor = new Coordinates(3, 4, 30);
 
         // create an instance of an anonymous class of Rover abstract class, in order to test its move() method
         Rover rover = new Rover("Rover-A", coor) {};
 
-        // move 4 units in 45 degree
-        double radians = Math.toRadians(30);
-        rover.move(5, radians);
+        //turn 30 degree and move 5 units
+        rover.turn(30);
+        rover.move(5);
 
         System.out.println("rover = " + rover.getX() + " " + rover.getY() + " " + rover.getTheta());
 

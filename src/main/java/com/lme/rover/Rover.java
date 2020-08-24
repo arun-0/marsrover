@@ -12,9 +12,12 @@ public abstract class Rover {
         this.coordinates = coordinates;
     };
 
-    public void move(int distance, double angle) {
-        coordinates.addTheta(angle);
+    public void turn(double angle) {
+        double radians = Math.toRadians(angle);
+        coordinates.addTheta(radians);
+    }
 
+    public void move(int distance) {
         double theta = coordinates.getTheta();
         coordinates.addX(distance * Math.cos(theta));
         coordinates.addY(distance * Math.sin(theta));
