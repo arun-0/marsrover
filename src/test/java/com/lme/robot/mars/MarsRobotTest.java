@@ -7,12 +7,15 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class MarsRobotTest {
+
+    private final MarsGrid marsGrid = new MarsGrid(30, 40);
+
     @Test
     public void roverShouldTurnLeftFromOriginCorrectly() {
         Coordinates coor = new Coordinates();
 
         // create an instance of an anonymous class of Rover abstract class, in order to test its move() method
-        MarsRobot robot = MarsRobot.init("MarsRobot-A", coor);
+        MarsRobot robot = MarsRobot.init("MarsRobot-A", coor, marsGrid);
 
         //turn Left and move
         robot.turn(90);
@@ -26,7 +29,7 @@ public class MarsRobotTest {
         Coordinates coor = new Coordinates();
 
         // create an instance of an anonymous class of Rover abstract class, in order to test its move() method
-        MarsRobot robot = MarsRobot.init("MarsRobot-A", coor);
+        MarsRobot robot = MarsRobot.init("MarsRobot-A", coor, marsGrid);
 
         //turn Left and move
         robot.turn(-90);
@@ -40,7 +43,7 @@ public class MarsRobotTest {
         Coordinates coor = new Coordinates();
 
         // create an instance of an anonymous class of Rover abstract class, in order to test its move() method
-        MarsRobot robot = MarsRobot.init("MarsRobot-A", coor);
+        MarsRobot robot = MarsRobot.init("MarsRobot-A", coor, marsGrid);
 
         //turn Left and move
         robot.move(1);
@@ -52,7 +55,7 @@ public class MarsRobotTest {
     public void roverShouldMoveAndTurnCorrectly() {
         Coordinates coor = new Coordinates(3, 4, 90);
 
-        MarsRobot robot = MarsRobot.init("MarsRobot-A", coor);
+        MarsRobot robot = MarsRobot.init("MarsRobot-A", coor, marsGrid);
         robot.move(1);
         Assertions.assertEquals("3 5 N", robot.tellCoordinates());
 
@@ -72,7 +75,7 @@ public class MarsRobotTest {
     public void roverShouldNotTurnPartially() {
         Coordinates coor = new Coordinates(3, 4, 90);
 
-        MarsRobot robot = MarsRobot.init("MarsRobot-A", coor);
+        MarsRobot robot = MarsRobot.init("MarsRobot-A", coor, marsGrid);
 
         // turn Partial left, must throw IllegalArgumentException
         assertThatExceptionOfType(IllegalArgumentException.class)
@@ -91,7 +94,7 @@ public class MarsRobotTest {
     public void roverShouldOnlyMoveByOneUnit() {
         Coordinates coor = new Coordinates(3, 4, 90);
 
-        MarsRobot robot = MarsRobot.init("MarsRobot-A", coor);
+        MarsRobot robot = MarsRobot.init("MarsRobot-A", coor, marsGrid);
 
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> {

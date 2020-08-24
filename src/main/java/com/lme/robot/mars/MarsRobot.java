@@ -8,13 +8,15 @@ import com.lme.rover.Coordinates;
  * turn by only 90 degrees
  */
 public class MarsRobot extends Robot {
+    private final MarsGrid marsGrid;
 
-    private MarsRobot(String name, Coordinates coordinates){
+    private MarsRobot(String name, Coordinates coordinates, MarsGrid marsGrid){
         super(name, coordinates);
+        this.marsGrid = marsGrid;
     };
 
-    public static MarsRobot init(String name, Coordinates coordinates) {
-        return new MarsRobot(name, coordinates);
+    public static MarsRobot init(String name, Coordinates coordinates, MarsGrid marsGrid) {
+        return new MarsRobot(name, coordinates, marsGrid);
     }
 
     @Override
