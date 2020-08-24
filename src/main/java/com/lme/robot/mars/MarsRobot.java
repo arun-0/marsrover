@@ -39,8 +39,11 @@ public class MarsRobot extends Robot {
 
             super.move(distance);
 
-            if(getX() > marsGrid.getMaxX() || getY() > marsGrid.getMaxY()) {
-                marsGrid.addScentedGrid(previousX, previousY);
+            if(getX() > marsGrid.getMaxX()) {
+                marsGrid.addScentedGrid(previousX, previousY, MarsOrientation.E);
+                isLost = true;
+            } else if(getY() > marsGrid.getMaxY()) {
+                marsGrid.addScentedGrid(previousX, previousY, MarsOrientation.N);
                 isLost = true;
             }
 

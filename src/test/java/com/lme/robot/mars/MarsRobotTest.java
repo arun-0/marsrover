@@ -120,7 +120,7 @@ public class MarsRobotTest {
 
         Assertions.assertEquals("29 41 N LOST", robot.tellCoordinates());
         Assertions.assertTrue(robot.isLost());
-        Assertions.assertTrue(marsGrid.isScented(29, 40));
+        Assertions.assertTrue(marsGrid.isScented(29, 40, MarsOrientation.N));
 
         // test robot getting lost along x axis
         coor = new Coordinates(29, 39, 90);
@@ -131,7 +131,34 @@ public class MarsRobotTest {
 
         Assertions.assertEquals("31 39 E LOST", robot.tellCoordinates());
         Assertions.assertTrue(robot.isLost());
-        Assertions.assertTrue(marsGrid.isScented(30, 39));
+        Assertions.assertTrue(marsGrid.isScented(30, 39, MarsOrientation.E));
+
+    }
+
+    @Test
+    public void robotShouldAvoid() {
+        Coordinates coor = new Coordinates(29, 39, 90);
+        MarsGrid marsGrid = new MarsGrid(30, 40);
+
+        // test robot getting lost along Y axis
+        MarsRobot robot = MarsRobot.init("MarsRobot-A", coor, marsGrid);
+        robot.move(1);
+        robot.move(1);
+
+        Assertions.assertEquals("29 41 N LOST", robot.tellCoordinates());
+        Assertions.assertTrue(robot.isLost());
+        Assertions.assertTrue(marsGrid.isScented(29, 40, MarsOrientation.N));
+
+        // test robot getting lost along x axis
+        coor = new Coordinates(29, 39, 90);
+        robot = MarsRobot.init("MarsRobot-A", coor, marsGrid);
+        robot.turn(-90);
+        robot.move(1);
+        robot.move(1);
+
+        Assertions.assertEquals("31 39 E LOST", robot.tellCoordinates());
+        Assertions.assertTrue(robot.isLost());
+        Assertions.assertTrue(marsGrid.isScented(30, 39, MarsOrientation.E));
 
     }
 
