@@ -3,10 +3,14 @@ package com.lme.robot.mars;
 public enum MarsOrientation {
     E(0), N(90), W(180), S(270);
 
-    private final double angle;
+    private final int angle;
 
-    MarsOrientation(double angle) {
+    MarsOrientation(int angle) {
         this.angle = angle;
+    }
+
+    public int getAngle() {
+        return angle;
     }
 
     public static MarsOrientation valueOf(double angle) {
