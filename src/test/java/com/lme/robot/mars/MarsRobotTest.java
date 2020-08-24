@@ -4,6 +4,8 @@ import com.lme.rover.Coordinates;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+
 public class MarsRobotTest {
     @Test
     public void roverShouldTurnLeftFromOriginCorrectly() {
@@ -65,5 +67,43 @@ public class MarsRobotTest {
         Assertions.assertEquals("4 6 N", robot.tellCoordinates());
 
     }
+
+    @Test
+    public void roverShouldNotTurnPartially() {
+        Coordinates coor = new Coordinates(3, 4, 90);
+
+        MarsRobot robot = MarsRobot.init("MarsRobot-A", coor);
+
+        // turn Partial left, must throw IllegalArgumentException
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> {
+                    robot.turn(25);
+                });
+
+        // turn Partial right, must throw IllegalArgumentException
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> {
+                    robot.turn(-45);
+                });
+    }
+
+    @Test
+    public void roverShouldOnlyMoveByOneUnit() {
+        Coordinates coor = new Coordinates(3, 4, 90);
+
+        MarsRobot robot = MarsRobot.init("MarsRobot-A", coor);
+
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> {
+                    robot.move(2);
+                });
+
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> {
+                    robot.move(0.5);
+                });
+
+    }
+
 
 }
