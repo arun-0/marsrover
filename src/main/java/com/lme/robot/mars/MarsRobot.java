@@ -46,12 +46,19 @@ public class MarsRobot extends Robot {
             if(getX() > marsGrid.getMaxX()) {
                 marsGrid.addScentedGrid(previousX, previousY, MarsOrientation.E);
                 isLost = true;
-                // reset coordinate to last seen position
-                super.move(-1 * distance);
+            } else if(getX() < 0) {
+                marsGrid.addScentedGrid(previousX, previousY, MarsOrientation.W);
+                isLost = true;
             } else if(getY() > marsGrid.getMaxY()) {
                 marsGrid.addScentedGrid(previousX, previousY, MarsOrientation.N);
                 isLost = true;
-                // reset coordinate to last seen position
+            } else if(getY() < 0) {
+                marsGrid.addScentedGrid(previousX, previousY, MarsOrientation.S);
+                isLost = true;
+            }
+
+            if(isLost) {
+                // reset coordinate to last seen position, for reporting
                 super.move(-1 * distance);
             }
 
